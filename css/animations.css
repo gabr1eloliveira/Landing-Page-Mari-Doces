@@ -1,0 +1,88 @@
+/* ==========================================================
+   Maria Doces - transições e estados de animação
+   (a movimentação principal é feita por GSAP e Anime.js)
+   ========================================================== */
+
+/* Transições suaves de estados da interface */
+.btn,
+.nav__link,
+.card,
+.footer a { will-change: auto; }
+
+.btn:active { transform: scale(0.97); }
+
+.card { transform: translateZ(0); }
+.card:hover { transform: translateY(-6px); }
+.card__media img { transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+.card:hover .card__media img { transform: scale(1.05); }
+
+.nav__link { transition: text-decoration-color 0.2s ease; }
+
+/* Botão flutuante: respiração discreta no ícone */
+.wa-float__icon { transition: transform 0.3s ease; }
+.wa-float:hover .wa-float__icon { transform: rotate(-8deg) scale(1.08); }
+.wa-float__heart {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  color: var(--pink);
+  font-size: 1rem;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: 0 2px 8px rgb(88 25 99 / 25%);
+  animation: wa-heart-float 1.4s ease-out infinite;
+  animation-play-state: paused;
+}
+.wa-float:hover .wa-float__heart,
+.wa-float:focus-visible .wa-float__heart { animation-play-state: running; }
+.wa-float__heart--1 { --heart-x: -22px; animation-delay: 0s; }
+.wa-float__heart--2 { --heart-x: 15px; animation-delay: 0.25s; }
+.wa-float__heart--3 { --heart-x: -10px; animation-delay: 0.5s; }
+.wa-float__heart--4 { --heart-x: 25px; animation-delay: 0.75s; }
+
+@keyframes wa-heart-float {
+  0% { transform: translate(0, 0) scale(0.5) rotate(-10deg); opacity: 0; }
+  15% { opacity: 1; }
+  100% { transform: translate(var(--heart-x), -58px) scale(1) rotate(12deg); opacity: 0; }
+}
+
+/* Corações posicionados no clique dos links de WhatsApp */
+.heart-burst-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  pointer-events: none;
+}
+.heart-burst {
+  position: absolute;
+  display: block;
+  font-size: 1.4rem;
+  line-height: 1;
+  text-shadow: 0 2px 8px rgb(88 25 99 / 20%);
+  will-change: transform, opacity;
+}
+
+/* Elementos decorativos: flutuação leve (somente sem preferência por menos movimento) */
+@keyframes soft-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.no-anime .decor--d1,
+.no-anime .decor--d3,
+.no-anime .decor--c2 { animation: soft-float 6s ease-in-out infinite; }
+
+/* Preferência por menos movimento: remove tudo */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+  .card:hover { transform: none; }
+  .card:hover .card__media img { transform: none; }
+}

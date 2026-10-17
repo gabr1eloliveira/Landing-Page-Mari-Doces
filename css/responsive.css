@@ -1,0 +1,87 @@
+/* ==========================================================
+   Maria Doces - ajustes para telas maiores (mobile-first)
+   ========================================================== */
+
+/* Tablet */
+@media (min-width: 640px) {
+  :root { --gutter: 2rem; }
+
+  .hero__actions .btn { flex: 0 0 auto; }
+  .footer__grid { grid-template-columns: 1.4fr 1fr 1.2fr; }
+  .wa-float__label {
+    position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: nowrap;
+  }
+  .wa-float { padding: 0 22px 0 18px; }
+
+  .menu__grid { grid-template-columns: repeat(2, 1fr); align-items: start; }
+  .card--brigadeiro { grid-column: 1; grid-row: 1 / 3; }
+  .card--beijinho { grid-column: 2; grid-row: 1; margin-top: var(--space-4); }
+  .card--branco { grid-column: 2; grid-row: 2; }
+}
+
+/* Desktop pequeno: menu horizontal */
+@media (min-width: 900px) {
+  :root { --header-h: 84px; --space-5: 5.5rem; --space-6: 8rem; }
+
+  /* Só no desktop: o blur cria um bloco de contenção que cortaria o menu mobile fixo */
+  .site-header {
+    background: rgba(255, 248, 252, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .nav__link { display: inline-flex; align-items: center; min-height: 44px; }
+  .menu-toggle { display: none; }
+  .nav {
+    position: static;
+    inset: auto;
+    padding: 0;
+    background: transparent;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .nav__list { display: flex; align-items: center; gap: var(--space-3); }
+  .nav__link { padding: 0.5rem 0; font-size: 1rem; font-weight: 600; }
+  .nav .btn--wa { margin-top: 0; }
+
+  .hero { padding-top: var(--space-5); }
+  .hero__grid { grid-template-columns: 1.15fr 0.85fr; gap: var(--space-5); }
+  .hero__visual { width: min(100%, 420px); margin-right: 1rem; }
+
+  .location__grid { grid-template-columns: 0.9fr 1.1fr; gap: var(--space-5); }
+
+  .cta__inner { grid-template-columns: 1.3fr 0.7fr; gap: var(--space-5); }
+}
+
+/* Desktop: composição assimétrica completa do cardápio */
+@media (min-width: 1024px) {
+  .menu__grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-4) var(--space-3);
+    align-items: start;
+  }
+  .card--brigadeiro { grid-column: 1 / 6; grid-row: 1 / 3; }
+
+  /* Cards horizontais de tamanhos e proporções diferentes */
+  .card--beijinho,
+  .card--branco { flex-direction: row; }
+  .card--beijinho .card__media,
+  .card--branco .card__media { aspect-ratio: auto; min-height: 280px; }
+  .card--beijinho .card__media img,
+  .card--branco .card__media img { position: absolute; inset: 0; }
+
+  .card--beijinho { grid-column: 6 / 12; grid-row: 1; margin-top: var(--space-4); }
+  .card--beijinho .card__media { flex: 0 0 42%; }
+
+  .card--branco { grid-column: 7 / 13; grid-row: 2; flex-direction: row-reverse; }
+  .card--branco .card__media { flex: 0 0 50%; }
+
+  .section__head { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: var(--space-4); align-items: end; }
+  .section__head .eyebrow { grid-column: 1 / -1; margin-bottom: 0; }
+  .section__head .section__lead { margin-top: 0; }
+}
+
+@media (min-width: 1280px) {
+  .container { max-width: 1240px; }
+}
